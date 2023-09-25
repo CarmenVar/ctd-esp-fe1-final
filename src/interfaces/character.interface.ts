@@ -2,10 +2,8 @@ export interface ICharacter {
     id:number;
     name: string;
     image: string;
-    esFavorito: boolean;
-    pageNext: string;
-    pagePrev: string;
-    source: string;
+    isFavorite: boolean;
+   
 }
 export interface IAllCharacters{
     allCharacters:ICharacter[]

@@ -1,5 +1,8 @@
 
 import './boton-favorito.css';
+import { useAppDispatch, useAppSelector } from '../../store';
+import { ADD_FAVORITOS } from '../../store/characters/slice';
+import { ICharacter } from '../../interfaces/character.interface';
 /**
  * Boton que indica si un elemento es favorito o no, y da la posibilidad de marcarlo/desmarcarlo
  * 
@@ -9,16 +12,29 @@ import './boton-favorito.css';
  * @returns un JSX element 
  */
 export interface IBotonFavorito {
-    esFavorito: boolean;
-    onClick: (id:number)=> void;
+    isFavorite: boolean;
+    source: string
     id: number
 }
 
-const BotonFavorito = ({esFavorito, onClick, id}: IBotonFavorito) => {
-    const src = esFavorito ? "/imagenes/star-filled.png" : "/imagenes/star.png"
+const BotonFavorito = ({isFavorite,  id, name, image }: ICharacter) => {
+    const dispatch = useAppDispatch()
+    useAppSelector((state) => state.characters)
+  
 
+       
+/**
+ * Disparador de Agregar a favoritos
+ * @author 'Carmen Vargas'
+ * @return {Array} un array de favoritos
+ */ 
+    const addFavorito = () => {
+        console.log('Botón Favorito ON CLICK');
+        dispatch(ADD_FAVORITOS( {isFavorite,  id, name, image} ));
+      }
+      const src = isFavorite ? "/imagenes/star-filled.png" : "/imagenes/star.png"
     return <div className="boton-favorito">
-        <img src={src} alt={"favorito"} onClick={()=>onClick(id)} />
+        <img src={src} alt={"favorito"} onClick={addFavorito} />
     </div>
 }
 
